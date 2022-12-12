@@ -1,4 +1,56 @@
 =============================================================================
+<Armitage - 12/05/2022>
+=============================================================================
+Thanks to redcanari for the fixes and updates - I forked from his work. 
+
+Instructions for Armitage on Kali 2022.3 with latest updates. Java 18 breaks EVERYTHING, so avoid for now. Do everything below within a root prompt!:
+
+msfdb init
+
+edit /etc/postgresql/15/main/pg_hba.conf
+
+on the line 97 (IPV4 local connections)
+switch “scram-sha-256” to “trust”
+
+systemctl enable postgresql
+systemctl stop postgresql
+systemctl start postgresql
+
+java -version
+
+if it says anything other than 11, lets go way back - because why not:
+
+apt update; apt install -y openjdk-11-jdk
+
+update-alternatives --config java
+
+choose the openjdk-11 as the default. then run java -version to make sure it is good to go.
+
+cd /opt
+
+git clone https://github.com/r00t0v3rr1d3/armitage.git
+
+cd armitage
+
+./package.sh
+
+cd release/unix
+
+./armitage
+
+username: msf
+password: msf
+
+Leave the rest. Do you want to start blah blah for you? Answer yes. 
+
+Observed broken functionality / issues:
+- Attacks - Find Attacks doesn't seem to work
+
+=============================================================================
+</Armitage - 12/05/2022>
+=============================================================================
+
+=============================================================================
 Armitage - Cyber Attack Management for Metasploit
 =============================================================================
    
